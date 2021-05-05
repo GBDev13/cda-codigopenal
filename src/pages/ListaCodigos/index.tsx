@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import * as S from './ListaCodigosStyles';
 
@@ -33,36 +33,35 @@ const ListaCodigos: React.FC = () => {
     return value.toLocaleLowerCase().replace(/\s/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, "");
   }
 
-  useEffect(() => {
-    function aplicarFiltros() {
+  const aplicarFiltros = useCallback(() => {
+    const filtrados = codigos?.data.filter
+    (codigo => !filtros?.busca ? true :
+      formatValue(String(codigo?.nome)).includes(formatValue(String(filtros?.busca))))
 
-      const filtrados = codigos?.data.filter
-        (codigo => !filtros?.busca ? true :
-          formatValue(String(codigo?.nome)).includes(formatValue(String(filtros?.busca))))
-  
-        .filter(codigo => Boolean(filtros?.status) === false ? true :
-        codigo.statusDescricao === filtros?.status)
+    .filter(codigo => Boolean(filtros?.status) === false ? true :
+    codigo.statusDescricao === filtros?.status)
 
-      switch (filtros?.ordem) {
-        case 'multa-maior' :
-          return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) > Number(b.multa)) ? -1 : 1)
-        case 'multa-menor' :
-          return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) < Number(b.multa)) ? -1 : 1)
-        case 'prisao-maior' :
-          return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.tempoPrisao) > Number(b.tempoPrisao)) ? -1 : 1)
-        case 'prisao-menor' :
-          return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.tempoPrisao) < Number(b.tempoPrisao)) ? -1 : 1)
-        case 'data-maior' :
-          return filtrados?.sort((a: ICodigo, b: ICodigo) => (new Date(String(a.dataCriacao)) > new Date(String(b.dataCriacao))) ? -1 : 1)
-        case 'data-menor' :
-          return filtrados?.sort((a: ICodigo, b: ICodigo) => (new Date(String(a.dataCriacao)) < new Date(String(b.dataCriacao))) ? -1 : 1)
-        default:
-          return filtrados
-      }
-
+    switch (filtros?.ordem) {
+      case 'multa-maior' :
+        return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) > Number(b.multa)) ? -1 : 1)
+      case 'multa-menor' :
+        return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) < Number(b.multa)) ? -1 : 1)
+      case 'prisao-maior' :
+        return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.tempoPrisao) > Number(b.tempoPrisao)) ? -1 : 1)
+      case 'prisao-menor' :
+        return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.tempoPrisao) < Number(b.tempoPrisao)) ? -1 : 1)
+      case 'data-maior' :
+        return filtrados?.sort((a: ICodigo, b: ICodigo) => (new Date(String(a.dataCriacao)) > new Date(String(b.dataCriacao))) ? -1 : 1)
+      case 'data-menor' :
+        return filtrados?.sort((a: ICodigo, b: ICodigo) => (new Date(String(a.dataCriacao)) < new Date(String(b.dataCriacao))) ? -1 : 1)
+      default:
+        return filtrados
     }
+  }, [codigos?.data, filtros?.busca, filtros?.ordem, filtros?.status])
+
+  useEffect(() => {
     setNewCodigos(aplicarFiltros());
-  }, [codigos?.data, filtros?.busca, filtros?.ordem, filtros?.status, setNewCodigos])
+  }, [aplicarFiltros, codigos?.data, filtros?.busca, filtros?.ordem, filtros?.status, setNewCodigos])
 
   const handleReset = useCallback(() => {
     dispatch(toggleResetando())
@@ -109,4 +108,4 @@ const ListaCodigos: React.FC = () => {
   )
 }
 
-export default ListaCodigos;
+export default memo(ListaCodigos);

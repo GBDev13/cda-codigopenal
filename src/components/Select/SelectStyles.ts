@@ -1,12 +1,13 @@
 import styled, { css } from 'styled-components';
 
 export const customStyles = {
-  option: (styles: any, state: { isDisabled: boolean }) => ({
+  option: (styles: any, state: { isDisabled: any; }) => ({
     ...styles,
     backgroundColor: state.isDisabled ? '#525252' : '#262623',
     cursor: state.isDisabled ? 'not-allowed' : 'pointer',
   }),
 }
+
 
 interface InputProps {
   hasValue: boolean;

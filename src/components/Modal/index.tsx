@@ -71,6 +71,7 @@ function MyModal() {
       }
 
       reset()
+      dispatch(setCurrentItem({}))
     } catch (err) {
       
       if (err instanceof Yup.ValidationError) {

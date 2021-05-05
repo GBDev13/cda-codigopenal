@@ -1,9 +1,10 @@
-import { createSlice, Dispatch } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { format } from "date-fns";
 import api from "../services/api";
 import { fecharModal } from "./modal";
 import { ICodigo, IStatus, ICodigos } from "./types";
 import ptBR from 'date-fns/locale/pt-BR';
+import { AppDispatch, RootState } from "./configureStore";
 
 const slice = createSlice({
   name: 'codigos',
@@ -76,7 +77,7 @@ const {
 
 export const { removerCodigo } = slice.actions;
 
-export const carregarCodigos = () => async (dispatch: Dispatch) => {
+export const carregarCodigos = () => async (dispatch: AppDispatch) => {
   try {
     dispatch(fetchStarted());
 
@@ -100,7 +101,7 @@ export const carregarCodigos = () => async (dispatch: Dispatch) => {
   }
 };
 
-export const criarCodigo = (codigo: ICodigo) => async (dispatch: Dispatch, getState: any) => {
+export const criarCodigo = (codigo: ICodigo) => async (dispatch: AppDispatch, getState: () => RootState) => {
   try {
     dispatch(fetchCriarStarted());
 
@@ -121,6 +122,8 @@ export const criarCodigo = (codigo: ICodigo) => async (dispatch: Dispatch, getSt
 
     const codigosNovos = [...codigos.data, {
       ...data,
+      // esse id só esta sendo colocado por conta do problema com a FAKE API
+      id: codigos.data.length + 1,
       dataFormatada: format(new Date(date), 'dd/MM/yy', { locale: ptBR }),
       statusDescricao: allStatus.filter((status: IStatus) => status.id === data.status)[0].descricao
     }]
@@ -133,7 +136,7 @@ export const criarCodigo = (codigo: ICodigo) => async (dispatch: Dispatch, getSt
   }
 };
 
-export const editarCodigo = (codigo: ICodigo, codigoId:number | undefined) => async (dispatch: Dispatch, getState: any) => {
+export const editarCodigo = (codigo: ICodigo, codigoId:number | undefined) => async (dispatch: AppDispatch, getState: () => RootState) => {
   try {
     dispatch(fetchEditarStarted());
 
@@ -141,17 +144,30 @@ export const editarCodigo = (codigo: ICodigo, codigoId:number | undefined) => as
 
     const date = new Date().toISOString();
 
-    const response = await api.put(`/codigopenal/${codigoId}`, {
-      ...codigo,
-      tempoPrisao: Number(codigo.tempoPrisao),
-      multa: Number(codigo.multa),
-      dataCriacao: new Date(date),
-    })
+    // Essa adaptação foi necessária (usar response como let, para poder substituir) pelo mesmo motivo da rota POST, a fake 
+    // api devolve sempre o mesmo id do ultimo item criado, neste caso o id 4,então ao tentar editar um
+    // código recém criado, ocorre um erro no PUT
+
+    // Aqui está o modo funcional, se a api fosse real.
+
+    // const response = await api.put(`/codigopenal/${codigoId}`, {
+    //   ...codigo,
+    //   tempoPrisao: Number(codigo.tempoPrisao),
+    //   multa: Number(codigo.multa),
+    //   dataCriacao: new Date(date),
+    // })
 
     const resposeStatus = await api.get('/status');
     const { data: allStatus } = resposeStatus;
 
-    const { data } = response;
+    // const { data } = response; COMENTADO POR CONTA DO AJUSTE CITADO ACIMA
+
+    const data = {
+      ...codigo,
+      tempoPrisao: Number(codigo.tempoPrisao),
+      multa: Number(codigo.multa),
+      dataCriacao: new Date(date),
+    }
 
     const codigosNovos = codigos.data.map((item: ICodigo) => {
       if(item.id !== codigoId) {

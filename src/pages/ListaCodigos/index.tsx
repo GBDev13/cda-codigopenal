@@ -95,7 +95,7 @@ const ListaCodigos: React.FC = () => {
 
         <S.CardGrid>
 
-          {codigos?.error && <h1>error</h1>}
+          {codigos?.error && <S.NoResults>Ocorreu um erro ao tentar carregar as informações.</S.NoResults>}
 
           {newCodigos?.map((codigo: ICodigo) => (
             <CodigoCard key={`${codigo.nome}-${codigo.id}`} dados={codigo} />

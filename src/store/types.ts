@@ -44,7 +44,7 @@ export interface IModal {
   isConfirmationOpen: boolean,
 }
 
-interface IFiltros {
+export interface IFiltros {
   busca: string | null,
   status: string | null,
   ordem: string | null,

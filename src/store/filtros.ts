@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IFiltros } from './types';
+
+const initialState: IFiltros = {
+  busca: null,
+  status: null,
+  ordem: null,
+  isResetting: false
+}
 
 const slice = createSlice({
   name: 'filtros',
-  initialState: {
-    busca: null,
-    status: null,
-    ordem: null,
-    isResetting: false
-  },
+  initialState,
   reducers: {
     setBusca(state, action) {
       state.busca = action.payload;

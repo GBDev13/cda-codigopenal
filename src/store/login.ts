@@ -1,6 +1,7 @@
 import { createSlice, Dispatch, PayloadAction } from "@reduxjs/toolkit";
 import api from "../services/api";
 import getLocalStorage from "./helper/getLocalStorage";
+import { IUser } from "./types";
 
 const slice = createSlice({
   name: 'login',
@@ -14,7 +15,7 @@ const slice = createSlice({
       state.loading = true;
     },
     fetchSuccess: {
-      reducer(state, action: PayloadAction<any, any, any>) {
+      reducer(state, action: PayloadAction<IUser, any, any>) {
         state.loading = false;
         state.data = action.payload;
         state.error = null;

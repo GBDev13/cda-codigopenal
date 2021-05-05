@@ -27,11 +27,10 @@ const slice = createSlice({
       state.data = [];
       state.error = action.payload;
     },
+    // Aqui faço a remoção de um cógido, sem chamar a API por conta dos motivos que serão citados abaixo
     removerCodigo(state: ICodigos, action) {
       state.data = state.data.filter(codigo => codigo.id !== action.payload);
     },
-
-    
     fetchCriarStarted(state: ICodigos) {
       state.loading = true;
     },

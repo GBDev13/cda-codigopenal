@@ -1,14 +1,17 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import * as S from './BuscaStyles';
 import ReactSelect from 'react-select'
 import { setBusca, setOrdem, setStatus } from '../../store/filtros';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { IState } from '../../store/types';
 
 const Busca: React.FC = () => {
   const [buscaInput, setBuscaInput] = useState('');
 
   const [filtro, setFiltro] = useState('');
   const [ordemInput, setOrdemInput] = useState('');
+
+  const { filtros:filters } = useSelector((state): IState => state);
 
   interface FiltroProps {
     value: string | boolean;
@@ -51,6 +54,22 @@ const Busca: React.FC = () => {
     {
       value: 'multa-menor',
       label: "Valor da multa (Menor)"
+    },
+    {
+      value: 'prisao-maior',
+      label: "Tempo de prisão (Maior)"
+    },
+    {
+      value: 'prisao-menor',
+      label: "Tempo de prisão (Menor)"
+    },
+    {
+      value: 'data-maior',
+      label: "Data de criação (Crescente)"
+    },
+    {
+      value: 'data-menor',
+      label: "Data de criação (Decrescente)"
     },
   ]
 
@@ -121,6 +140,17 @@ const Busca: React.FC = () => {
     dispatch(setOrdem(option?.value))
   }, [dispatch])
 
+  useEffect(() => {
+    setBuscaInput('')
+    dispatch(setBusca(''))
+
+    setFiltro('')
+    dispatch(setStatus(''))
+
+    setOrdemInput('')
+    dispatch(setOrdem(''))
+  }, [dispatch, filters?.isResetting])
+
   return (
     <S.Container>
       <div>
@@ -132,6 +162,7 @@ const Busca: React.FC = () => {
           value={filtros.filter(obj => obj.value === filtro)}
           onChange={handleFiltrar}
           placeholder="Filtrar por..."
+          classNamePrefix="react-select"
           noOptionsMessage={() => "Sem resultados"}
         />
         <ReactSelect
@@ -141,6 +172,7 @@ const Busca: React.FC = () => {
           value={ordens.filter(obj => obj.value === ordemInput)}
           onChange={handleOrdenar}
           placeholder="Ordenar por..."
+          classNamePrefix="react-select"
           noOptionsMessage={() => "Sem resultados"}
         />
       </div>

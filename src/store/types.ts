@@ -23,6 +23,7 @@ export interface ICodigo {
   status?: number;
   statusDescricao?: string;
   dataCriacao?: string;
+  dataFormatada?: string;
 }
 
 export interface ICodigos {
@@ -47,6 +48,7 @@ interface IFiltros {
   busca: string | null,
   status: string | null,
   ordem: string | null,
+  isResetting: boolean,
 }
 
 export interface IState extends DefaultRootState {

@@ -1,7 +1,9 @@
 import { createSlice, Dispatch } from "@reduxjs/toolkit";
+import { format } from "date-fns";
 import api from "../services/api";
 import { fecharModal } from "./modal";
 import { ICodigo, IStatus, ICodigos } from "./types";
+import ptBR from 'date-fns/locale/pt-BR';
 
 const slice = createSlice({
   name: 'codigos',
@@ -87,6 +89,7 @@ export const carregarCodigos = () => async (dispatch: Dispatch) => {
     const codigos = data.map((codigo: ICodigo) => {
       return {
         ...codigo,
+        dataFormatada: format(new Date(String(codigo.dataCriacao)), 'dd/MM/yy', { locale: ptBR }),
         statusDescricao: allStatus.filter((status: IStatus) => status.id === codigo.status)[0].descricao
       }
     })
@@ -101,8 +104,11 @@ export const criarCodigo = (codigo: ICodigo) => async (dispatch: Dispatch, getSt
   try {
     dispatch(fetchCriarStarted());
 
+    const date = new Date().toISOString();
+
     const response = await api.post('/codigopenal', {
       ...codigo,
+      dataCriacao: new Date(date),
       tempoPrisao: Number(codigo.tempoPrisao),
       multa: Number(codigo.multa),
     })
@@ -115,7 +121,7 @@ export const criarCodigo = (codigo: ICodigo) => async (dispatch: Dispatch, getSt
 
     const codigosNovos = [...codigos.data, {
       ...data,
-      dataCriacao: String(new Date()),
+      dataFormatada: format(new Date(date), 'dd/MM/yy', { locale: ptBR }),
       statusDescricao: allStatus.filter((status: IStatus) => status.id === data.status)[0].descricao
     }]
 
@@ -133,11 +139,13 @@ export const editarCodigo = (codigo: ICodigo, codigoId:number | undefined) => as
 
     const { codigos } = getState();
 
+    const date = new Date().toISOString();
+
     const response = await api.put(`/codigopenal/${codigoId}`, {
       ...codigo,
       tempoPrisao: Number(codigo.tempoPrisao),
       multa: Number(codigo.multa),
-      dataCriacao: String(new Date()),
+      dataCriacao: new Date(date),
     })
 
     const resposeStatus = await api.get('/status');
@@ -162,8 +170,6 @@ export const editarCodigo = (codigo: ICodigo, codigoId:number | undefined) => as
     })
 
     dispatch(fecharModal())
-
-    console.log(codigosNovos)
 
     return dispatch(fetchEditarSuccess(codigosNovos))
   } catch (error) {

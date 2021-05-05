@@ -41,4 +41,16 @@ export const Container = styled.main`
       padding: .8rem;
     }
   }
+
+  @media (max-width: 900px) {
+    .react-select__control {
+      height: 3rem;
+      padding: 0;
+    }
+    .react-select__control,
+    .react-select__single-value,
+    .react-select__placeholder {
+      font-size: 1.2rem;
+    }
+  }
 `;

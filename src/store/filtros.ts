@@ -6,6 +6,7 @@ const slice = createSlice({
     busca: null,
     status: null,
     ordem: null,
+    isResetting: false
   },
   reducers: {
     setBusca(state, action) {
@@ -18,8 +19,11 @@ const slice = createSlice({
       console.log('PASSO 1 - definiu', action.payload)
       state.ordem = action.payload;
     },
+    toggleResetando(state) {
+      state.isResetting = !state.isResetting;
+    },
   }
 })
 
-export const { setBusca, setStatus, setOrdem } = slice.actions;
+export const { setBusca, setStatus, setOrdem, toggleResetando } = slice.actions;
 export default slice.reducer;

@@ -8,6 +8,34 @@ export const CardContainer = styled.div`
   background: var(--gray-700);
   border-radius: 1rem;
   height: 100%;
+  animation: showCard .6s both;
+
+  section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+    p.date {
+      color: var(--gray-100);
+      transition: .5s;
+
+      &:hover {
+        color: var(--yellow-500);
+      }
+    }
+  }
+
+  @keyframes showCard {
+    from {
+      opacity: 0;
+      transform: scale(.6) translateY(100px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0px);
+    }
+  }
 
   > div:first-child {
     padding: 1.5rem;
@@ -27,7 +55,6 @@ export const CardContainer = styled.div`
     font-size: 1.5rem;
     display:flex;
     align-items: center;
-    margin-bottom: 1rem;
 
     @media(max-width: 1200px) {
       font-size: 1.2rem;
@@ -82,6 +109,10 @@ export const CardContainer = styled.div`
         margin-top: .5rem;
       }
     }
+
+    @media(max-width: 750px) {
+      flex-direction: row;
+    }
   }
 
   .footer {
@@ -98,6 +129,10 @@ export const CardContainer = styled.div`
 
       @media(max-width: 1000px) {
         max-width: 85%;
+      }
+
+      @media(max-width: 750px) {
+        max-width: 70%;
       }
 
       .separador {
@@ -128,6 +163,14 @@ export const CardContainer = styled.div`
           svg {
             width: 25px;
             height: 25px;
+          }
+        }
+
+        @media(max-width: 750px) {
+          font-size: 1.3rem;
+          svg {
+            width: 35px;
+            height: 35px;
           }
         }
 

@@ -13,6 +13,7 @@ import { carregarCodigos } from '../../store/codigos';
 import Loading from '../../components/Loading';
 import ModalConfirmacao from '../../components/Modal/ModalConfirmação';
 import { IoIosRemoveCircleOutline } from 'react-icons/io';
+import { toggleResetando } from '../../store/filtros';
 
 const ListaCodigos: React.FC = () => {
   const { modal, codigos, filtros } = useSelector((state): IState => state);
@@ -38,34 +39,40 @@ const ListaCodigos: React.FC = () => {
     return value.toLocaleLowerCase().replace(/\s/g, '').normalize('NFD').replace(/[\u0300-\u036f]/g, "");
   }
 
-  const ordenar = useCallback((state) => {
-    switch (ordem) {
-      case 'multa-maior' :
-        console.log('PASSO 2 - chegou aqui MAIOR')
-        return state.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) < Number(b.multa)) ? -1 : 1)
-      case 'multa-menor' :
-        console.log('PASSO 1 - chegou aqui MENOR')
-        return state.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) > Number(b.multa)) ? -1 : 1)
-      default:
-        console.log('PASSO 1 - chegou aqui DEFAULT')
-        return state
+  useEffect(() => {
+    function aplicarFiltros() {
+
+      const filtrados = codigos?.data.filter
+        (codigo => !filtros?.busca ? true :
+          formatValue(String(codigo?.nome)).includes(formatValue(String(filtros?.busca))))
+  
+        .filter(codigo => Boolean(filtros?.status) === false ? true :
+        codigo.statusDescricao === filtros?.status)
+
+      switch (filtros?.ordem) {
+        case 'multa-maior' :
+          return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) > Number(b.multa)) ? -1 : 1)
+        case 'multa-menor' :
+          return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) < Number(b.multa)) ? -1 : 1)
+        case 'prisao-maior' :
+          return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.tempoPrisao) > Number(b.tempoPrisao)) ? -1 : 1)
+        case 'prisao-menor' :
+          return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.tempoPrisao) < Number(b.tempoPrisao)) ? -1 : 1)
+        case 'data-maior' :
+          return filtrados?.sort((a: ICodigo, b: ICodigo) => (new Date(String(a.dataCriacao)) > new Date(String(b.dataCriacao))) ? -1 : 1)
+        case 'data-menor' :
+          return filtrados?.sort((a: ICodigo, b: ICodigo) => (new Date(String(a.dataCriacao)) < new Date(String(b.dataCriacao))) ? -1 : 1)
+        default:
+          return filtrados
+      }
+
     }
-  }, [ordem])
+    setNewCodigos(aplicarFiltros());
+  }, [codigos?.data, filtros?.busca, filtros?.ordem, filtros?.status, setNewCodigos])
 
-  useEffect(() => {
-    setNewCodigos(
-      codigos?.data.filter
-      (codigo => !filtros?.busca ? true :
-        formatValue(String(codigo?.nome)).includes(formatValue(String(filtros?.busca))))
-      .filter(codigo => Boolean(filtros?.status) === false ? true :
-      codigo.statusDescricao === filtros?.status)
-      );
-  }, [codigos?.data, filtros?.busca, filtros?.status, setNewCodigos])
-
-  useEffect(() => {
-    console.log('PASSO 3 - vou definir a array')
-    setNewCodigos((oldState) => ordenar(oldState))
-  }, [ordem, ordenar])
+  const handleReset = useCallback(() => {
+    dispatch(toggleResetando())
+  }, [dispatch])
 
   return (
     <>
@@ -79,7 +86,7 @@ const ListaCodigos: React.FC = () => {
           <div>
             {codigos?.loading && <Loading />}
             {(filtros?.status || filtros?.ordem || filtros?.busca) && (
-              <button type="button" className="filtros">
+              <button type="button" className="filtros" onClick={handleReset}>
                 <IoIosRemoveCircleOutline color="#fff" />
                 remover filtros
               </button>

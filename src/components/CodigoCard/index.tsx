@@ -30,10 +30,13 @@ const CodigoCard = ({ dados }: CodigoProps) => {
     <S.CardContainer>
       <div>
         <div>
-          <strong>
-            {dados.nome}
-            <span className={dados.statusDescricao}>{dados.statusDescricao}</span>
-          </strong>
+          <section>
+            <strong>
+              {dados.nome}
+              <span className={dados.statusDescricao}>{dados.statusDescricao}</span>
+            </strong>
+            <p className="date">{dados.dataFormatada}</p>
+          </section>
           <p>{dados.descricao}</p>
         </div>
         <ul>

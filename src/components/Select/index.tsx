@@ -58,6 +58,9 @@ export default function Select({ name, ...rest }: Props) {
         setValue(ref.state.value.value)
         return ref.state.value.value;
       },
+      clearValue: (ref: any) => {
+        ref.select.clearValue();
+      }
     });
   }, [fieldName, registerField, rest.isMulti]);
 

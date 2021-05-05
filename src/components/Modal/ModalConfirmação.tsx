@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IState } from '../../store/types';
 import { useCallback } from 'react';
 import { fecharModalConfirmação } from '../../store/modal';
-import api from '../../services/api';
 import { removerCodigo } from '../../store/codigos';
 import { useToasts } from 'react-toast-notifications';
 

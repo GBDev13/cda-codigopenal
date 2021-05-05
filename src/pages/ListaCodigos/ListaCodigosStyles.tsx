@@ -40,6 +40,7 @@ export const Topo = styled.div`
     font-size: 1.25rem;
     color: var(--yellow-100);
     margin-left: 1rem;
+    padding-right: 1.8rem;
 
     > svg {
       width: 35px;
@@ -56,6 +57,7 @@ export const Topo = styled.div`
     @media(max-width:1150px) {
       padding: .4rem;
       font-size: .8rem;
+      padding-right: 1.2rem;
     }
   }
 

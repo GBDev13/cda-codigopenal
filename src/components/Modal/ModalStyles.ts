@@ -14,6 +14,10 @@ export const Container = styled(Modal)`
   flex-direction:column;
   animation: goUp .5s;
 
+  @media(max-width: 1000px) {
+    width: 80vw;
+  }
+
   @keyframes goUp {
     from {
       transform: scale(0);
@@ -90,12 +94,16 @@ export const ContainerConfirmacao = styled(Modal)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40vw;
+  width: 50vw;
   height:auto;
   border-radius: 1.5rem;
   flex-direction:column;
   animation: goUp .5s;
   overflow: hidden;
+
+  @media(max-width: 1000px) {
+    width: 70vw;
+  }
 
   @keyframes goUp {
     from {

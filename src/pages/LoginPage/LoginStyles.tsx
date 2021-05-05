@@ -6,7 +6,15 @@ export const Container = styled.main`
   width: 100vw;
   height: 100vh;
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
+
+  @media(max-width:900px) {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  @media(max-width:700px) {
+    grid-template-columns: 1fr;
+  }
 
   form > div + div {
     margin-top: 2.5rem;

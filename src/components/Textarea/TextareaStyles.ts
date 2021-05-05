@@ -24,6 +24,7 @@ export const TextareaContainer = styled.div<InputProps>`
   }
 
   textarea {
+    resize:none;
     width: 100%;
     background: var(--gray-500);
     border: none;

@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { IState } from '../../store/types';
 import { useCallback, useRef } from 'react';
-import { fecharEdicao, fecharModal } from '../../store/modal';
+import { fecharEdicao, fecharModal, setCurrentItem } from '../../store/modal';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { FormHandles, SubmitHandler } from '@unform/core';
 import getValidationErrors from '../../utils/getValidationErrors';
@@ -44,6 +44,7 @@ function MyModal() {
   const handleClose = useCallback(() => {
     dispatch(fecharModal())
     dispatch(fecharEdicao())
+    dispatch(setCurrentItem({}))
   }, [dispatch])
 
   const handleSubmit: SubmitHandler<FormData> = async (data, { reset }) => {
@@ -100,7 +101,7 @@ function MyModal() {
         <AiOutlineCloseCircle color="#f9b036" size={30} onClick={handleClose}/>
       </S.TopoModal>
 
-      <S.FormContainer ref={modalFormRef} onSubmit={handleSubmit}  initialData={initial}> 
+      <S.FormContainer ref={modalFormRef} onSubmit={handleSubmit} initialData={initial}> 
         <Input name="nome" label="Nome" />
         <Select name="status" placeholder="Status" />
         <Textarea name="descricao" label="Descrição" />

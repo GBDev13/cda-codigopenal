@@ -104,7 +104,7 @@ $ yarn start
 ### 🔗 Link para o projeto online
 
 
-[Clique e veja todas as funcionalidades em tempo real!](https://moveit-eight-omega.vercel.app)
+[Clique e veja todas as funcionalidades em tempo real!](https://cda-codigopenal.vercel.app/)
 
 &nbsp;
 

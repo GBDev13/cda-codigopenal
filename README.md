@@ -1,92 +1,87 @@
 # Sistema de códigos penais - Cidade Alta 💛🎮
 
-![mocknot](https://user-images.githubusercontent.com/71772559/109436537-b9281d00-79fe-11eb-82cf-a7cc70cd6bb5.png)
+![mockup01](https://user-images.githubusercontent.com/71772559/117219254-4a3eba00-addb-11eb-8bc9-7d2b6e41acf6.png)
 
 ## 📚 Informações sobre o projeto
 
-* O Moveit foi o App desenvolvido durante a Next Level Week #04 da Rocketseat! Ultilizando a técnica de pomodoro com um toque de gamificação, deixando suas tarefas mais produtivas e mantendo o bem-estar/saúde.
+* Esse sistema foi usado como método de "desafio" para mostrar as habilidades no processo seletivo do Cidade Alta. A ideia principal era desenvolver um sistema para controlar os códigos penais e para isso o usuário precisaria passar por um fluxo de autenticação e após logado, ter a possibilidade de consultar, incluir, editar e visualizar os códigos penais da Cidade Alta.
 
 &nbsp;
 
-## 💻 Funcionalidades iniciais do projeto
+## 💻 Funcionalidades do sistema
 
-* Pomodoro interativo, a cada 25 minutos ele gera uma tarefa nova, recompençando com pontos assim que completada;
-* Sistema de níveis, para gerar a gamificação comentada acima;
-* Design moderno e clean;
+* Sistema de autenticação (Confere se os dados batem com a API) e salva os mesmos no localStorage;
+* Visualização, criação, edição e remoção de códigos penais pelo painel;
+* Sistema de filtros (Ativo, inativo);
+* Sistema de Ordem crescente e descrescente (Valor da multa, tempo de prisão e data de criação);
+* Sistema de Busca por texto;
+* Uso do useCallback e useMemo para uma melhor performace;
+* Design moderno, clean e responsivo;
 
-&nbsp;
 
-## 👨🏻‍💻 Funcionalidades desenvolvidas por mim, para levar o projeto ao próximo nível
-* Página home, possibilitando o login;
-* Página 404;
-* Login com o Github, puxando suas informações e armazenando as mesmas no MongoDb;
-* Leaderboard, mostrando os usuários com a maior quantidade de desafios concluídos em conta;
-* Design responsivo e contando com tema dark (transformado todos os códigos css em styled-components);
-* Sistema de conquistas, que são armazenadas no MongoDb;
-* Página de perfil do usuário, mostrando alguns dados sobre a conta + as conquistas que o mesmo possui;
-* SEO da aplicação;
-* Compartilhamento pelo twitter ao subir de nível, gerando automaticamente uma página e imagem customizada para cada usuário, com os respectivos dados!
-
-![mockups](https://user-images.githubusercontent.com/71772559/109436203-39e61980-79fd-11eb-9e22-33efefa0ed38.png)
+![mock02](https://user-images.githubusercontent.com/71772559/117219857-7c9ce700-addc-11eb-862c-2132da7f72e6.png)
 
 &nbsp;
 
-## 🚀 Sistema de compartilhamento no Twitter funcionando
+## 🚀 Veja algumas telas em funcionamento
 
-![Feature Twitter](https://user-images.githubusercontent.com/71772559/110251328-c002e280-7f5e-11eb-9091-ae5c1351cd07.gif)
+OBS: Os gifs estão em uma resolução/qualidade reduzida por conta dos limites do github.
 
-&nbsp;
+# Sistema de login com verificação
 
-## 🥇 Sistema de conquistas funcionando
-
-![Feature Perfil](https://user-images.githubusercontent.com/71772559/109734003-03480480-7b9f-11eb-8835-891c6a298516.gif)
+![login](https://user-images.githubusercontent.com/71772559/117221336-71978600-addf-11eb-84dc-ee61bcdfb8e5.gif)
 
 &nbsp;
 
-## 🎨 Design desenvolvido para os ícones de cada conquista
+# Criação de um novo item
 
-![iconesconquista](https://user-images.githubusercontent.com/71772559/109735822-245e2480-7ba2-11eb-8b66-e945b087f8e6.png)
+![criação](https://user-images.githubusercontent.com/71772559/117219983-bbcb3800-addc-11eb-8baf-8271e7df3e9d.gif)
 
 &nbsp;
+
+# Edição e remoção de itens
+
+![edicaoeremocao](https://user-images.githubusercontent.com/71772559/117220127-0056d380-addd-11eb-9ebd-d376ee957d60.gif)
+
+&nbsp;
+
+# Responsividade
+
+![filtrosfuncionais](https://user-images.githubusercontent.com/71772559/117220258-3d22ca80-addd-11eb-9617-68e81e12cb99.gif)
 
 ## 🛠️ Tecnologias/Ferramentas ultilizadas
 
 * [React](https://pt-br.reactjs.org/E)
-* [Next.js](https://nextjs.org/)
-* [Next Auth](https://next-auth.js.org/)
-* [TypeScript](https://www.typescriptlang.org/)
-* [MongoDb](https://www.mongodb.com/)
+* [Redux](https://redux.js.org/)
+* [Unform](https://unform.dev/)
+* [Yup](https://github.com/jquense/yup)
 * [Styled Components](https://styled-components.com/)
-
-![ezgif com-optimize (2)](https://user-images.githubusercontent.com/71772559/109437018-7a479680-7a01-11eb-9f7b-23cd97c875e6.gif)
-
-&nbsp;
-
-## 🖌️ Layouts usados nesse projeto
-* [Move.it 1.0 (Desenvolvido em aula)](https://www.figma.com/file/pZbJns12UgFmKhXKDPTli4/Move.it-1.0-(Copy))
-* [Move.it 2.0 (Deixado como desafio)](https://www.figma.com/file/v98FU24x8P7z0nguwTh3pU/Move.it-2.0-(Copy)?node-id=160%3A2761)
+* [TypeScript](https://www.typescriptlang.org/)
 
 &nbsp;
 
-## 🖥 Todas as páginas da aplicação
+## 🖌️ Layout usado nesse projeto (Desenvolvido por mim)
+* [Veja no Figma!](https://www.figma.com/file/jkXPoD7HU8NHdcMd4ZrGnn/Desafio-CDA?node-id=0%3A1)
 
-![allpages](https://user-images.githubusercontent.com/71772559/110255830-7e7d3200-7f74-11eb-99c5-d5e060af60b2.png)
+&nbsp;
+
+## 🗣 Comentário gerais (IMPORTANTE)
+Esse desafio foi super interessante pra mim pois eu nunca tinha pegado o Redux para estudar "a fundo" e com esse projeto tive animo para adentrar nos estudos e aplicar os mesmos na prática! Eu sempre fiquei impressionado ao ver os fronts que o Cidade Alta tem pois sempre revolucionaram o universo FiveM aqui no Brasil... Deixo meus parabéns a toda equipe e tudo isso é um os motivos de eu ter me dedicado tanto a esse teste.
+
+Deixo aqui algo muito importante, durante o desenvolvinto, mais exato na parte de lidar com a API, por estarmos usando uma Fake API, me dei a liberdade de altera um pouco os códigos para que ao usuário interagir com a criação, edição e remoção de itens, tudo ocorresse em tempo real pois notei que a Fake API não guarda as requisições POST que enviamos. Dentro do meu código, deixei comentários explicando o porque dessas alterações e juntamente a eles, o código para fazer a real chamada a API, caso o projeto seja levado pra frente! Espero que entendam e apoiem essa ideia, eu não queria deixar o teste visualmente incompleto.
+
 
 &nbsp;
 
 ## ⚙️ Instalação
 ```
 # Abra um terminal e copie este repositório com o comando
-$ git clone https://github.com/GBDev13/moveit.git
+$ git clone https://github.com/GBDev13/cda-codigopenal.git
 ```
 
 ```
 # Acesse a pasta da aplicação
-$ cd moveit
-
-# Crie um arquivo .env.local e coloque as variaveis
-# de ambiente baseado no arquivo .env.example que
-# se encontra na pasta moveit
+$ cd cda-codigopenal
 
 # Instale as dependências
 $ yarn install
@@ -94,31 +89,6 @@ $ yarn install
 # Inicie a aplicação
 $ yarn start
 
-
-
-## Como alterar o tempo do timer? (Está como 6 segundos para testes práticos)
-## Abra o arquivo src/contexts/CountdownContext.tsx
-## Lá você irá encontrar essas linhas:
-
-const [time, setTime] = useState(0.1 * 60)
-setTime(0.1 * 60);
-
-## Para retornar aos 25 minutos, apenas altere o 0.1 para 25
-
-## Também é necessário alterar o tempo da barra de progresso, para
-## fazer essa alteração, acesse o arquivo src/styles/components/ButtonStyles.tsx
-## Lá você irá encontrar essa linha:
-
-animation: roundtime calc(6 * 1s) linear forwards;
-
-## Para retornar aos 25 minutos, altere de 6 * 1s para 1500 * 1s
-
-
-
-# Deploy na Vercel (INFORMAÇÃO SUPER IMPORTANTE)
-# Para o sistema de compartilhamento no twitter funcionar
-# é necessário usar a versão do Node 12.x, que pode ser alterada nas
-# configurações do seu projeto
 ```
 
 &nbsp;
@@ -126,14 +96,9 @@ animation: roundtime calc(6 * 1s) linear forwards;
 ### 🔗 Link para o projeto online
 
 
-[MoveIt](https://moveit-eight-omega.vercel.app)
+[Clique e veja todas as funcionalidades em tempo real!](https://moveit-eight-omega.vercel.app)
 
 &nbsp;
-
-## 📝 Licença
-
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo de [LICENÇA](https://github.com/GBDev13/moveit/blob/main/LICENSE) para detalhes.
-
 
 ---
 

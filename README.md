@@ -29,25 +29,33 @@ OBS: Os gifs estão em uma resolução/qualidade reduzida por conta dos limites 
 
 # Sistema de login com verificação
 
-![login](https://user-images.githubusercontent.com/71772559/117221336-71978600-addf-11eb-84dc-ee61bcdfb8e5.gif)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/71772559/117221336-71978600-addf-11eb-84dc-ee61bcdfb8e5.gif" />
+</p>
 
 &nbsp;
 
 # Criação de um novo item
 
-![criação](https://user-images.githubusercontent.com/71772559/117219983-bbcb3800-addc-11eb-8baf-8271e7df3e9d.gif)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/71772559/117219983-bbcb3800-addc-11eb-8baf-8271e7df3e9d.gif" />
+</p>
 
 &nbsp;
 
 # Edição e remoção de itens
 
-![edicaoeremocao](https://user-images.githubusercontent.com/71772559/117220127-0056d380-addd-11eb-9ebd-d376ee957d60.gif)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/71772559/117220127-0056d380-addd-11eb-9ebd-d376ee957d60.gif" />
+</p>
 
 &nbsp;
 
 # Responsividade
 
-![filtrosfuncionais](https://user-images.githubusercontent.com/71772559/117220258-3d22ca80-addd-11eb-9617-68e81e12cb99.gif)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/71772559/117220258-3d22ca80-addd-11eb-9617-68e81e12cb99.gif" />
+</p>
 
 ## 🛠️ Tecnologias/Ferramentas ultilizadas
 

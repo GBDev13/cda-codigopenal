@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useField } from '@unform/core'
-import { InputContainer } from './InputStyles';
+import { TextareaContainer } from './TextareaStyles';
 
 import { BiErrorCircle } from 'react-icons/bi';
 
@@ -9,11 +9,11 @@ interface Props {
   label?: string
 }
 
-type InputProps = JSX.IntrinsicElements['input'] & Props
+type InputProps = JSX.IntrinsicElements['textarea'] & Props
 
-export default function Input({ name, label, ...rest }: InputProps) {
+export default function Textarea({ name, label, ...rest }: InputProps) {
 
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLTextAreaElement>(null)
   const { fieldName, defaultValue, registerField, error} = useField(name)
 
   const [value, setValue] = useState<boolean | string>();
@@ -41,16 +41,16 @@ export default function Input({ name, label, ...rest }: InputProps) {
   }, [value])
 
   return (
-    <InputContainer hasValue={!!value} error={!!error}>
+    <TextareaContainer className="textarea" hasValue={!!inputRef.current?.value} error={!!error}>
       {label && <label htmlFor={fieldName}>{label}</label>}
-      <input
+      <textarea
         id={fieldName}
         ref={inputRef}
         defaultValue={defaultValue}
         onChange={({target}) => setValue(target.value)}
         {...rest}
-      />
+      ></textarea>
       {error && <span><BiErrorCircle size={20} color="#c54c4c" />{error}</span>}
-    </InputContainer>
+    </TextareaContainer>
   )
 }

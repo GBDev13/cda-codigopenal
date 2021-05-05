@@ -6,13 +6,32 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     outline: none;
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+      transition:.3s;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--yellow-500);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover{
+      background: var(--yellow-200);
+    }
+    ::-webkit-scrollbar-track{
+      background: var(--gray-200);
+      border-radius: 10px;
+    }
   }
 
   :root {
     --gray-100: #656565;
+    --gray-200: #6b6b6b;
     --gray-500: #262623;
     --gray-600: #2a2a2a;
     --gray-700: #222222;
+    --gray-800: #2F2F2F;
     --gray-900: #1D1D1B;
     
     --yellow-100: #ffecac;
@@ -51,6 +70,10 @@ const GlobalStyle = createGlobalStyle`
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  ul {
+    list-style: none;
   }
 
   @keyframes fadeIn {

@@ -8,6 +8,10 @@ export const Container = styled.main`
   display:grid;
   grid-template-columns: 1fr 1fr;
 
+  form > div + div {
+    margin-top: 2.5rem;
+  }
+
   .content {
     width: 100%;
     height: 100%;
@@ -39,6 +43,9 @@ export const Container = styled.main`
     }
 
     button {
+      display:flex;
+      align-items: center;
+      justify-content:center;
       background: var(--yellow-500);
       border: none;
       padding: 1rem;

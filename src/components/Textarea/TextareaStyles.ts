@@ -5,7 +5,7 @@ interface InputProps {
   error: boolean;
 }
 
-export const InputContainer = styled.div<InputProps>`
+export const TextareaContainer = styled.div<InputProps>`
   position: relative;
 
   label {
@@ -23,11 +23,11 @@ export const InputContainer = styled.div<InputProps>`
     `}
   }
 
-  input {
+  textarea {
     width: 100%;
     background: var(--gray-500);
     border: none;
-    height: 3rem;
+    height: 7rem;
     padding: .5rem;
     color: ${(props) => props.hasValue ? 'var(--yellow-500)' : 'var(--gray-100)'};
 

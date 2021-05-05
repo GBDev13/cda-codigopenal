@@ -2,8 +2,16 @@ import * as S from './LoginStyles';
 import Form from './Form';
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
+import { useSelector } from 'react-redux';
+import { IState } from '../../store/types';
+import { useHistory } from 'react-router';
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
+  const { login } = useSelector((state): IState => state);
+
+  const history = useHistory();
+
+  if(login?.data) history.push("/");
 
   return (
     <S.Container>

@@ -18,7 +18,6 @@ const CodigoCard = ({ dados }: CodigoProps) => {
   const remover = useCallback(async () => {
     dispatch(abrirModalConfirmação())
     dispatch(setCurrentItem(dados))
-    dispatch(setCurrentItem({}))
   }, [dispatch, dados])
 
   const editar = useCallback(async () => {

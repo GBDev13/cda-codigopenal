@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { IState } from '../../store/types';
 import { useCallback } from 'react';
-import { fecharModalConfirmação } from '../../store/modal';
+import { fecharModalConfirmação, setCurrentItem } from '../../store/modal';
 import { removerCodigo } from '../../store/codigos';
 import { useToasts } from 'react-toast-notifications';
 
@@ -18,6 +18,7 @@ function ModalConfirmacao() {
 
   const handleClose = useCallback(() => {
     dispatch(fecharModalConfirmação())
+    dispatch(setCurrentItem({}))
   }, [dispatch])
 
   const handleConfirm = useCallback(async () => {

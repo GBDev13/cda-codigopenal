@@ -19,12 +19,6 @@ const ListaCodigos: React.FC = () => {
   const { modal, codigos, filtros } = useSelector((state): IState => state);
   const [newCodigos, setNewCodigos] = useState(codigos?.data);
 
-  const [ordem, setOrdem] = useState('');
-
-  useEffect(() => {
-    setOrdem(String(filtros?.ordem))
-  }, [filtros?.ordem])
-
   const dispatch = useDispatch();
 
   const openModal = useCallback(() => {

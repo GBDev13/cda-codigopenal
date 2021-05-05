@@ -16,7 +16,6 @@ const slice = createSlice({
       state.status = action.payload;
     },
     setOrdem(state, action) {
-      console.log('PASSO 1 - definiu', action.payload)
       state.ordem = action.payload;
     },
     toggleResetando(state) {

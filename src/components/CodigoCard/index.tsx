@@ -3,7 +3,7 @@ import * as S from './CodigoCardStyles';
 import { FaEdit } from 'react-icons/fa';
 import { CgRemove } from 'react-icons/cg';
 import { ICodigo } from '../../store/types';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { abrirEdicao, abrirModal, abrirModalConfirmação, setCurrentItem } from '../../store/modal';
@@ -65,4 +65,4 @@ const CodigoCard = ({ dados }: CodigoProps) => {
   )
 }
 
-export default CodigoCard;
+export default memo(CodigoCard);

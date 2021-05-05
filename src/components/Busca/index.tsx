@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import * as S from './BuscaStyles';
 import ReactSelect from 'react-select'
 import { setBusca, setOrdem, setStatus } from '../../store/filtros';
@@ -180,4 +180,4 @@ const Busca: React.FC = () => {
   )
 }
 
-export default Busca;
+export default memo(Busca);

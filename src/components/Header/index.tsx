@@ -9,7 +9,7 @@ export default function Header() {
     <S.HeaderContainer>
       <div>
         <Logo />
-        <h3>Tenha um ótimo dia<br />oficial <span>{login.data.nome || 'Fulano'}</span></h3>
+        <h3>Tenha um ótimo dia<br />oficial <span>{login?.data?.nome || 'Fulano'}</span></h3>
       </div>
     </S.HeaderContainer>
   )

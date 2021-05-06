@@ -180,8 +180,8 @@ export const editarCodigo = (codigo: ICodigo, codigoId:number | undefined) => as
           statusDescricao: allStatus.filter((status: IStatus) => status.id === data.status)[0].descricao,
           tempoPrisao: Number(data.tempoPrisao),
           multa: Number(data.multa),
-          dataCriacao: date,
-          dataFormatada: format(new Date(date), 'dd/MM/yy', { locale: ptBR }),
+          dataCriacao: item.dataCriacao || date,
+          dataFormatada: format(new Date(item.dataCriacao || date), 'dd/MM/yy', { locale: ptBR }),
         }
       }
     })

@@ -48,6 +48,10 @@ export const SelectContainer = styled.div<InputProps>`
 
   .react-select__input {
     color: ${(props) => props.hasValue ? 'var(--yellow-500)' : 'var(--gray-100)'};
+
+    ${props => props.error && css`
+      color: var(--failure);
+    `}
   }
 
   .react-select__placeholder {
@@ -66,6 +70,10 @@ export const SelectContainer = styled.div<InputProps>`
 
   .react-select__single-value {
     color: ${(props) => props.hasValue ? 'var(--yellow-500)' : 'var(--gray-100)'};
+
+    ${props => props.error && css`
+      color: var(--failure);
+    `}
   }
 
   .react-select__menu {
@@ -87,7 +95,11 @@ export const SelectContainer = styled.div<InputProps>`
   }
 
   .react-select__value-container--has-value {
-    color: var(--yellow-500);
+    color: ${(props) => props.hasValue ? 'var(--yellow-500)' : 'var(--gray-100)'};
+
+    ${props => props.error && css`
+      color: var(--failure);
+    `}
   }
 
   span {

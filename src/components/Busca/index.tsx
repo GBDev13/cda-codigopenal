@@ -3,7 +3,7 @@ import * as S from './BuscaStyles';
 import ReactSelect from 'react-select'
 import { setBusca, setOrdem, setStatus } from '../../store/filtros';
 import { useDispatch, useSelector } from 'react-redux';
-import { IState } from '../../store/types';
+import { RootState } from '../../store/configureStore';
 
 const Busca: React.FC = () => {
   const [buscaInput, setBuscaInput] = useState('');
@@ -11,7 +11,7 @@ const Busca: React.FC = () => {
   const [filtro, setFiltro] = useState('');
   const [ordemInput, setOrdemInput] = useState('');
 
-  const { filtros:filters } = useSelector((state): IState => state);
+  const { filtros:filters } = useSelector((state: RootState) => state);
 
   interface FiltroProps {
     value: string | boolean;
@@ -131,13 +131,13 @@ const Busca: React.FC = () => {
   }, [dispatch])
 
   const handleFiltrar = useCallback((option) => {
-    setFiltro(String(option?.value))
-    dispatch(setStatus(option?.value))
+    setFiltro(String(option.value))
+    dispatch(setStatus(option.value))
   }, [dispatch])
 
   const handleOrdenar = useCallback((option) => {
-    setOrdemInput(String(option?.value))
-    dispatch(setOrdem(option?.value))
+    setOrdemInput(String(option.value))
+    dispatch(setOrdem(option.value))
   }, [dispatch])
 
   useEffect(() => {
@@ -149,7 +149,7 @@ const Busca: React.FC = () => {
 
     setOrdemInput('')
     dispatch(setOrdem(''))
-  }, [dispatch, filters?.isResetting])
+  }, [dispatch, filters.isResetting])
 
   return (
     <S.Container>

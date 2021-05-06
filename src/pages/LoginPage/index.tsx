@@ -3,15 +3,15 @@ import Form from './Form';
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { useSelector } from 'react-redux';
-import { IState } from '../../store/types';
 import { useHistory } from 'react-router';
+import { RootState } from '../../store/configureStore';
 
 const LoginPage = () => {
-  const { login } = useSelector((state): IState => state);
+  const { login } = useSelector((state:RootState) => state);
 
   const history = useHistory();
 
-  if(login?.data) history.push("/");
+  if(login.data) history.push("/");
 
   return (
     <S.Container>

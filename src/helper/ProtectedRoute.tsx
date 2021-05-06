@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import {
   Route, useHistory,
 } from "react-router-dom";
-import { IState } from '../store/types';
+import { RootState } from "../store/configureStore";
 
 interface ProtectedRouterProps {
   path: string;
@@ -12,11 +12,11 @@ interface ProtectedRouterProps {
 }
 
 function ProtectedRoute({ path, exact, children }: ProtectedRouterProps) {
-  const { login } = useSelector((state): IState => state);
+  const { login } = useSelector((state: RootState) => state);
 
   const history = useHistory();
 
-  if (!login?.data) {
+  if (!login.data) {
     history.push("/login");
   }
 

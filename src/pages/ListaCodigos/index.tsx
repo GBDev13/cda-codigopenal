@@ -16,8 +16,8 @@ import { IoIosRemoveCircleOutline } from 'react-icons/io';
 import { toggleResetando } from '../../store/filtros';
 
 const ListaCodigos: React.FC = () => {
-  const { modal, codigos, filtros } = useSelector((state): IState => state);
-  const [newCodigos, setNewCodigos] = useState(codigos?.data);
+  const { modal, codigos, filtros } = useSelector((state: IState) => state);
+  const [newCodigos, setNewCodigos] = useState(codigos.data);
 
   const dispatch = useDispatch();
 
@@ -34,34 +34,34 @@ const ListaCodigos: React.FC = () => {
   }
 
   const aplicarFiltros = useCallback(() => {
-    const filtrados = codigos?.data.filter
-    (codigo => !filtros?.busca ? true :
-      formatValue(String(codigo?.nome)).includes(formatValue(String(filtros?.busca))))
+    const filtrados = codigos.data.filter
+    ((codigo) => !filtros.busca ? true :
+      formatValue(String(codigo.nome)).includes(formatValue(String(filtros.busca))))
 
-    .filter(codigo => Boolean(filtros?.status) === false ? true :
-    codigo.statusDescricao === filtros?.status)
+    .filter(codigo => Boolean(filtros.status) === false ? true :
+    codigo.statusDescricao === filtros.status)
 
-    switch (filtros?.ordem) {
+    switch (filtros.ordem) {
       case 'multa-maior' :
-        return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) > Number(b.multa)) ? -1 : 1)
+        return filtrados.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) > Number(b.multa)) ? -1 : 1)
       case 'multa-menor' :
-        return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) < Number(b.multa)) ? -1 : 1)
+        return filtrados.sort((a: ICodigo, b: ICodigo) => (Number(a.multa) < Number(b.multa)) ? -1 : 1)
       case 'prisao-maior' :
-        return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.tempoPrisao) > Number(b.tempoPrisao)) ? -1 : 1)
+        return filtrados.sort((a: ICodigo, b: ICodigo) => (Number(a.tempoPrisao) > Number(b.tempoPrisao)) ? -1 : 1)
       case 'prisao-menor' :
-        return filtrados?.sort((a: ICodigo, b: ICodigo) => (Number(a.tempoPrisao) < Number(b.tempoPrisao)) ? -1 : 1)
+        return filtrados.sort((a: ICodigo, b: ICodigo) => (Number(a.tempoPrisao) < Number(b.tempoPrisao)) ? -1 : 1)
       case 'data-maior' :
-        return filtrados?.sort((a: ICodigo, b: ICodigo) => (new Date(String(a.dataCriacao)) > new Date(String(b.dataCriacao))) ? -1 : 1)
+        return filtrados.sort((a: ICodigo, b: ICodigo) => (new Date(String(a.dataCriacao)) > new Date(String(b.dataCriacao))) ? -1 : 1)
       case 'data-menor' :
-        return filtrados?.sort((a: ICodigo, b: ICodigo) => (new Date(String(a.dataCriacao)) < new Date(String(b.dataCriacao))) ? -1 : 1)
+        return filtrados.sort((a: ICodigo, b: ICodigo) => (new Date(String(a.dataCriacao)) < new Date(String(b.dataCriacao))) ? -1 : 1)
       default:
         return filtrados
     }
-  }, [codigos?.data, filtros?.busca, filtros?.ordem, filtros?.status])
+  }, [codigos.data, filtros.busca, filtros.ordem, filtros.status])
 
   useEffect(() => {
     setNewCodigos(aplicarFiltros());
-  }, [aplicarFiltros, codigos?.data, filtros?.busca, filtros?.ordem, filtros?.status, setNewCodigos])
+  }, [aplicarFiltros, codigos.data, filtros.busca, filtros.ordem, filtros.status, setNewCodigos])
 
   const handleReset = useCallback(() => {
     dispatch(toggleResetando())
@@ -69,16 +69,16 @@ const ListaCodigos: React.FC = () => {
 
   return (
     <>
-      {modal?.isOpen && <Modal />}
-      {modal?.isConfirmationOpen && <ModalConfirmacao />}
+      {modal.isOpen && <Modal />}
+      {modal.isConfirmationOpen && <ModalConfirmacao />}
       <Header />
       <S.Container>
         <S.Topo>
           <h2>Listagem de códigos penais</h2>
           
           <div>
-            {codigos?.loading && <Loading />}
-            {(filtros?.status || filtros?.ordem || filtros?.busca) && (
+            {codigos.loading && <Loading />}
+            {(filtros.status || filtros.ordem || filtros.busca) && (
               <button type="button" className="filtros" onClick={handleReset}>
                 <IoIosRemoveCircleOutline color="#fff" />
                 remover filtros
@@ -95,13 +95,13 @@ const ListaCodigos: React.FC = () => {
 
         <S.CardGrid>
 
-          {codigos?.error && <S.NoResults>Ocorreu um erro ao tentar carregar as informações.</S.NoResults>}
+          {!codigos.loading && codigos.error && <S.NoResults>Ocorreu um erro ao tentar carregar as informações.</S.NoResults>}
 
-          {newCodigos?.map((codigo: ICodigo) => (
+          {newCodigos.map((codigo: ICodigo) => (
             <CodigoCard key={`${codigo.nome}-${codigo.id}`} dados={codigo} />
           ))}
 
-          {!newCodigos?.length && !codigos?.loading && <S.NoResults>Não foi possível encontrar resultados com os filtros atuais.</S.NoResults>}
+          {!newCodigos.length && !codigos.loading && <S.NoResults>Não foi possível encontrar resultados com os filtros atuais.</S.NoResults>}
         </S.CardGrid>
       </S.Container>
     </>

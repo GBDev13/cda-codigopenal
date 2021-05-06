@@ -1,7 +1,6 @@
 import * as S from './ModalStyles';
 import Modal from 'react-modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { IState } from '../../store/types';
 import { useCallback, useRef } from 'react';
 import { fecharEdicao, fecharModal, setCurrentItem } from '../../store/modal';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
@@ -13,6 +12,7 @@ import Textarea from '../Textarea';
 import Select from '../Select';
 import { criarCodigo, editarCodigo } from '../../store/codigos';
 import Loading from '../Loading';
+import { RootState } from '../../store/configureStore';
 
 interface FormData {
   nome: string;
@@ -24,17 +24,17 @@ interface FormData {
 
 function MyModal() {
   Modal.setAppElement('#root')
-  const { modal, codigos } = useSelector((state): IState => state);
-  const isOpen = modal?.isOpen || false;
+  const { modal, codigos } = useSelector((state: RootState) => state);
+  const isOpen = modal.isOpen || false;
 
-  const current = modal?.currentItem;
+  const current = modal.currentItem;
 
   const initial = {
-    descricao: current?.descricao,
-    multa: current?.multa,
-    nome: current?.nome,
-    status: current?.status,
-    tempoPrisao: current?.tempoPrisao,
+    descricao: current.descricao,
+    multa: current.multa,
+    nome: current.nome,
+    status: current.status,
+    tempoPrisao: current.tempoPrisao,
   }
 
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ function MyModal() {
     try {
       const schema = Yup.object().shape({
         nome: Yup.string().required('Esse campo é obrigatório'),
-        status: Yup.number().required('Esse campo é obrigatório'),
+        status: Yup.number().typeError('Selecione uma opção válida').required('Esse campo é obrigatório'),
         descricao: Yup.string().required('Esse campo é obrigatório'),
         tempoPrisao: Yup.number().typeError('Esse campo só aceita números').required('Esse campo é obrigatório'),
         multa: Yup.number().typeError('Esse campo só aceita números').required('Esse campo é obrigatório'),
@@ -62,11 +62,11 @@ function MyModal() {
         abortEarly: false,
       });
 
-      if(modal?.isEdditing) {
-        dispatch(editarCodigo(data, modal?.currentItem.id));
+      if(modal.isEdditing) {
+        dispatch(editarCodigo(data, modal.currentItem.id));
       }
 
-      if(!modal?.isEdditing) {
+      if(!modal.isEdditing) {
         dispatch(criarCodigo(data));
       }
 
@@ -98,7 +98,7 @@ function MyModal() {
       }}
     >
       <S.TopoModal>
-        {modal?.isEdditing ? 'Editar código' : 'Adicionar um novo código'}
+        {modal.isEdditing ? 'Editar código' : 'Adicionar um novo código'}
         <AiOutlineCloseCircle color="#f9b036" size={30} onClick={handleClose}/>
       </S.TopoModal>
 
@@ -111,7 +111,7 @@ function MyModal() {
       </S.FormContainer>
       
       <button onClick={() => modalFormRef.current?.submitForm()}>
-        {codigos?.loading ? <Loading /> : modal?.isEdditing ? 'Confirmar edição' : 'Confirmar criação'}
+        {codigos.loading ? <Loading /> : modal.isEdditing ? 'Confirmar edição' : 'Confirmar criação'}
       </button>
     </S.Container>
   );

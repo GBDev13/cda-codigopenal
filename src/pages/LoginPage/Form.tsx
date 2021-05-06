@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from '../../store/login';
 import Loading from '../../components/Loading';
 import { useToasts } from 'react-toast-notifications';
-import { IState } from '../../store/types';
+import { RootState } from '../../store/configureStore';
 
 interface FormData {
   usuario: string
@@ -37,23 +37,23 @@ export default function MyForm() {
     }
   }
 
-  const { login } = useSelector((state): IState => state);
+  const { login } = useSelector((state: RootState) => state);
   const { addToast } = useToasts();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if(login?.error) {
-      addToast(login?.error, { appearance: 'error', autoDismiss: true });
+    if(login.error) {
+      addToast(login.error, { appearance: 'error', autoDismiss: true });
     }
-  }, [addToast, login?.error])
+  }, [addToast, login.error])
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
       <Input name="usuario" label="Usuário" />
       <Input name="senha" label="Senha" type="password" />
       <button>
-        {login?.loading ? <Loading /> : 'entrar'}
+        {login.loading ? <Loading /> : 'entrar'}
       </button>
     </Form>
   )

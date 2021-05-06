@@ -81,6 +81,11 @@ function MyModal() {
     }
   }
 
+  const submitForm = useCallback(() => {
+    modalFormRef.current?.submitForm()
+    dispatch(fecharEdicao())
+  }, [dispatch])
+
   return (
     <S.Container
       isOpen={isOpen}
@@ -110,7 +115,7 @@ function MyModal() {
         <Input name="multa" label="Valor da multa" type="number"/>
       </S.FormContainer>
       
-      <button onClick={() => modalFormRef.current?.submitForm()}>
+      <button onClick={submitForm}>
         {codigos.loading ? <Loading /> : modal.isEdditing ? 'Confirmar edição' : 'Confirmar criação'}
       </button>
     </S.Container>

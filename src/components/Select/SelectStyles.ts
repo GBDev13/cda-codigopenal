@@ -46,6 +46,10 @@ export const SelectContainer = styled.div<InputProps>`
     }
   }
 
+  .react-select__input {
+    color: ${(props) => props.hasValue ? 'var(--yellow-500)' : 'var(--gray-100)'};
+  }
+
   .react-select__placeholder {
     color: ${(props) => props.hasValue ? 'var(--yellow-500)' : 'var(--gray-100)'};
     font-size: 1.5rem;

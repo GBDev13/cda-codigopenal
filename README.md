@@ -38,7 +38,7 @@ OBS: Os gifs estão em uma resolução/qualidade reduzida por conta dos limites 
 # Criação de um novo item
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/71772559/117219983-bbcb3800-addc-11eb-8baf-8271e7df3e9d.gif" />
+  <img src="https://user-images.githubusercontent.com/71772559/117369189-f5627880-ae9a-11eb-9294-28aef43156d0.gif" />
 </p>
 
 &nbsp;

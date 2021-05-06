@@ -71,7 +71,7 @@ const {
   fetchCriarError,
   fetchEditarStarted,
   fetchEditarSuccess,
-  fetchEditarError
+  fetchEditarError,
 } = slice.actions;
 
 export const { removerCodigo } = slice.actions;
@@ -122,7 +122,7 @@ export const criarCodigo = (codigo: ICodigo) => async (dispatch: AppDispatch, ge
     const codigosNovos = [...codigos.data, {
       ...data,
       // esse id só esta sendo colocado por conta do problema com a FAKE API
-      id: codigos.data.length + 1,
+      id: Math.floor(Math.random() * (1000 - 10)) + 10,
       dataFormatada: format(new Date(date), 'dd/MM/yy', { locale: ptBR }),
       statusDescricao: allStatus.filter((status: IStatus) => status.id === data.status)[0].descricao
     }]
@@ -161,11 +161,11 @@ export const editarCodigo = (codigo: ICodigo, codigoId:number | undefined) => as
 
     // const { data } = response; COMENTADO POR CONTA DO AJUSTE CITADO ACIMA
 
+    // Esse é um fake response para funcionar no ambiente sem a API real
     const data = {
       ...codigo,
       tempoPrisao: Number(codigo.tempoPrisao),
       multa: Number(codigo.multa),
-      dataCriacao: new Date(date),
     }
 
     const codigosNovos = codigos.data.map((item: ICodigo) => {
@@ -176,10 +176,12 @@ export const editarCodigo = (codigo: ICodigo, codigoId:number | undefined) => as
       } else {
         return {
           ...codigo,
-          id: data.id,
+          id: item.id,
           statusDescricao: allStatus.filter((status: IStatus) => status.id === data.status)[0].descricao,
           tempoPrisao: Number(data.tempoPrisao),
           multa: Number(data.multa),
+          dataCriacao: date,
+          dataFormatada: format(new Date(date), 'dd/MM/yy', { locale: ptBR }),
         }
       }
     })

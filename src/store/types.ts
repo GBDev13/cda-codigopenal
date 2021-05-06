@@ -1,4 +1,3 @@
-import { FormHandles } from "@unform/core";
 import { DefaultRootState } from "react-redux";
 
 
@@ -52,10 +51,10 @@ export interface IFiltros {
 }
 
 export interface IState extends DefaultRootState {
-  login?: ILogin;
-  modal?: IModal;
-  codigos?: ICodigos;
-  filtros?: IFiltros;
+  login: ILogin;
+  modal: IModal;
+  codigos: ICodigos;
+  filtros: IFiltros;
 }
 
 export interface ILocalStorage {
